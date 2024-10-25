@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   return (
@@ -14,14 +15,20 @@ const LandingPage = () => {
               All for Free
             </span>
             <h1 className="text-5xl font-extrabold leading-tight text-gray-900 ">
-              Exam Papers, Subject wise Notes, Mock Papers and a Lot more
+              Get all VIT
+            Exam Papers, Subject wise Notes, Mock Papers and a Lot more
+            at one Stop Place
             </h1>
             <p className="text-sm text-gray-600">Crafted By</p>
             <p className="text-lg font-bold text-gray-900">
               Open Source Contributors
             </p>
+            <Link to="/upload">
             <Button className='m-3'>Upload Papers</Button>
+            </Link>   
+            <Link to='/viewpapers'>      
             <Button className='m-3'>Download Papers</Button>
+            </Link>   
           </div>
 
           {/* Right Section (Image) */}

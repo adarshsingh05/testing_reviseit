@@ -18,9 +18,9 @@ export function MenubarDemo() {
             </Link>
             </MenubarMenu>
             <MenubarMenu>
-             <Link to="/userpage">
+             <Link to="/upload">
                 <MenubarTrigger className="font-bold h-full flex items-center cursor-pointer">
-                    User Profile
+                    Upload Papers
                 </MenubarTrigger>
                 
             </Link>
@@ -28,9 +28,9 @@ export function MenubarDemo() {
             
 
             <MenubarMenu>
-            <Link to="/interviewroom">
+            <Link to="/viewpapers">
                 <MenubarTrigger className="font-bold h-full flex items-center cursor-pointer">
-                    Interview Room
+                    Download Papers
                 </MenubarTrigger>
             </Link>
             </MenubarMenu>
@@ -38,14 +38,14 @@ export function MenubarDemo() {
             <MenubarMenu>
             <Link to="/user-schedule">
                 <MenubarTrigger className="font-bold h-full flex items-center cursor-pointer">
-                    My Schedule
+                    Subject Wise Notes
                 </MenubarTrigger>
             </Link>
             </MenubarMenu>
             <MenubarMenu>
             <Link to="/resources">
                 <MenubarTrigger className="font-bold h-full flex items-center cursor-pointer">
-                    Resources
+                    Other Resources
                 </MenubarTrigger>
             </Link>
             </MenubarMenu>
