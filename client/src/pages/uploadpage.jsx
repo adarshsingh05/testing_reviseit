@@ -53,50 +53,71 @@ const UploadPage = () => {
   };
 
   return (
-    <div className="bg-[#FAEBEA] min-h-screen">
+    <div className=" min-h-screen">
       <Navbar />
-      <div className="flex flex-col items-center justify-center p-6">
-        <h1 className="text-3xl font-bold mb-4">Upload Exam Paper</h1>
-        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md space-y-4 w-full max-w-md">
-          <input
-            type="text"
-            placeholder="Semester"
-            value={semester}
-            onChange={(e) => setSemester(e.target.value)}
-            required
-            className="p-2 border border-gray-300 rounded w-full"
-          />
-          <input
-            type="text"
-            placeholder="Subject"
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            required
-            className="p-2 border border-gray-300 rounded w-full"
-          />
-          <input
-            type="text"
-            placeholder="Exam Slot"
-            value={examSlot}
-            onChange={(e) => setExamSlot(e.target.value)}
-            required
-            className="p-2 border border-gray-300 rounded w-full"
-          />
-          <input
-            type="text"
-            placeholder="examType"
-            value={examType}
-            onChange={(e) => setExamType(e.target.value)}
-            required
-            className="p-2 border border-gray-300 rounded w-full"
-          />
-          <input
-            type="file"
-            onChange={handleFileChange}
-            required
-            className="p-2 border border-gray-300 rounded w-full"
-          />
-          <Button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded w-full">
+      <h1 className="text-4xl font-mono text-center mb-6 mt-4">Upload Question Papers,Help other</h1>
+
+      <div className="flex flex-col  p-6">
+        <form onSubmit={handleSubmit} className=" p-6 rounded-lg shadow-lg shadow-gray-700  space-y-4 w-full max-w-md">
+          <p className='text-center font-sans font-medium text-l'>Fill the Below Form to Upload the Paper</p>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Semester</label>
+            <input
+              type="text"
+              placeholder="Semester"
+              value={semester}
+              onChange={(e) => setSemester(e.target.value)}
+              required
+              className="p-2 border border-gray-300 rounded w-full"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+            <input
+              type="text"
+              placeholder="Subject"
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              required
+              className="p-2 border border-gray-300 rounded w-full"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Exam Slot</label>
+            <input
+              type="text"
+              placeholder="Exam Slot"
+              value={examSlot}
+              onChange={(e) => setExamSlot(e.target.value)}
+              required
+              className="p-2 border border-gray-300 rounded w-full"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Exam Type</label>
+            <select
+              value={examType}
+              onChange={(e) => setExamType(e.target.value)}
+              required
+              className="p-2 border border-gray-300 rounded w-full"
+            >
+              <option value="" disabled>Select Exam Type</option>
+              <option value="CAT 1">CAT 1</option>
+              <option value="CAT 2">CAT 2</option>
+              <option value="FAT">FAT</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Upload File</label>
+            <input
+              type="file"
+              onChange={handleFileChange}
+              required
+              className="p-2 border border-gray-300 rounded w-full"
+            />
+          </div>
+          <Button type="submit" className="bg-purple-500 text-white text-xl font-bold px-4 py-2 rounded-3xl w-full hover:bg-purple-600 transition duration-200">
             Upload
           </Button>
         </form>

@@ -75,10 +75,10 @@ app.post("/upload", upload.single("file"), async (req, res) => {
     try {
         // Create a new File document
         const newFile = new File({
-            semester,
-            subject,
-            examSlot,
-            examType,
+            semester: semester.toUpperCase(),
+            subject: subject.toUpperCase(),
+            examSlot: examSlot.toUpperCase(),
+            examType: examType.toUpperCase(),
             filePath: req.file.path, // Path to the uploaded file
         });
 
