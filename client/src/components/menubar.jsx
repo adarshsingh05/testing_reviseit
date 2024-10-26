@@ -43,7 +43,7 @@ export function MenubarDemo() {
             </Link>
             </MenubarMenu>
             <MenubarMenu>
-            <Link to="/resources">
+            <Link to="/res">
                 <MenubarTrigger className="font-bold h-full flex items-center cursor-pointer">
                     Other Resources
                 </MenubarTrigger>

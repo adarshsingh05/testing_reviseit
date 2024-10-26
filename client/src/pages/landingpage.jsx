@@ -1,9 +1,16 @@
+import Motivation from "@/components/Motivation";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {
+  // Function to format the date to a readable format
+  const getCurrentDate = () => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date().toLocaleDateString(undefined, options);
+  };
+
   return (
     <div className="">
       <Navbar />
@@ -11,7 +18,7 @@ const LandingPage = () => {
         {/* Top Banner Section */}
         <div className="bg-gradient-to-r from-purple-500 to-gray-400 text-white py-8 px-6 rounded-2xl h-[200px] w-[80%] flex flex-col md:flex-row items-center justify-around m-6 mt-10">
           <div className="flex flex-col space-y-2">
-            <p className="text-sm">September 4, 2023</p>
+            <p className="text-sm">{getCurrentDate()}</p> {/* Display dynamic date here */}
             <h1 className="text-2xl font-bold">Welcome back, John!</h1>
             <p className="text-base">Always stay updated in your student portal</p>
           </div>
@@ -76,7 +83,26 @@ const LandingPage = () => {
         </div>
 
         {/* Additional Content Section */}
-        <div>hi there</div>
+        <Motivation/>
+         {/* Footer */}
+         <div className="flex w-full h-auto ">
+                <div className=" backdrop-blur-lg bg-white/30  border-black height-[auto] w-[100%] mt-6 ml-6 mr-6 mb-2 border rounded-md">
+                    <div className="flex flex-row h-[40%] justify-around mt-3 mb-2 ml-4 mr-4 border rounded-md">
+                      <Link to='https://www.linkedin.com/in/adarshsingh05/'>
+                        <div className="font-bold">Contact us</div>
+                        </Link>
+                        <Link to='https://github.com/adarshsingh05/Freelancing-portal'>
+                        <div className="font-bold">Contribute</div>
+                        </Link>
+                        <Link to='https://github.com/adarshsingh05/Freelancing-portal'>
+                        <div className="font-bold">Suggest Us</div>
+                        </Link>
+                    </div>
+                    <div className="text-center mb-4">
+                        The site is currently in Development Mode, contribute to make it even better ❤️
+                    </div>
+                </div>
+            </div>
       </div>
     </div>
   );

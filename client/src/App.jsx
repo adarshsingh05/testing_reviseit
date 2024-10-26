@@ -4,6 +4,8 @@ import './App.css'
 import LandingPage from './pages/landingpage'
 import UploadPage from './pages/uploadpage'
 import ViewPapers from './pages/viewPapers'
+import Motivation from './components/Motivation'
+import SubjectsPage from './pages/card1'
 
 
 const router = createBrowserRouter([
@@ -18,6 +20,11 @@ const router = createBrowserRouter([
         path: '/viewpapers',
         element: <ViewPapers/>
       },
+      {
+        path: '/csfundamentals',
+        element: <SubjectsPage/>
+      },
+      
       {
         path: '/upload',
         element: <UploadPage/>
