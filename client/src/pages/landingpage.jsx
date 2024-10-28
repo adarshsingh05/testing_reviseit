@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import Motivation from "@/components/Motivation";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
@@ -85,24 +86,7 @@ const LandingPage = () => {
         {/* Additional Content Section */}
         <Motivation/>
          {/* Footer */}
-         <div className="flex w-full h-auto ">
-                <div className=" backdrop-blur-lg bg-white/30  border-black height-[auto] w-[100%] mt-6 ml-6 mr-6 mb-2 border rounded-md">
-                    <div className="flex flex-row h-[40%] justify-around mt-3 mb-2 ml-4 mr-4 border rounded-md">
-                      <Link to='https://www.linkedin.com/in/adarshsingh05/'>
-                        <div className="font-bold">Contact us</div>
-                        </Link>
-                        <Link to='https://github.com/adarshsingh05/Freelancing-portal'>
-                        <div className="font-bold">Contribute</div>
-                        </Link>
-                        <Link to='https://github.com/adarshsingh05/Freelancing-portal'>
-                        <div className="font-bold">Suggest Us</div>
-                        </Link>
-                    </div>
-                    <div className="text-center mb-4">
-                        The site is currently in Development Mode, contribute to make it even better ❤️
-                    </div>
-                </div>
-            </div>
+         <Footer/>
       </div>
     </div>
   );

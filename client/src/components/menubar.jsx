@@ -8,9 +8,9 @@ import { Link } from "react-router-dom";
 export function MenubarDemo() {
     return (
         <div className="h-16 w-[780px]"> {/* Set height here */}
-        <Menubar className="h-full w-full lg:flex hidden  justify-between">
+        <Menubar className="h-full w-full lg:flex hidden border-black  justify-between bg-[#d9d9d9]">
 
-            <MenubarMenu>
+            <MenubarMenu className='text-red-700'>
             <Link to="/">
                 <MenubarTrigger className="font-bold h-full flex items-center cursor-pointer">
                     Home Page

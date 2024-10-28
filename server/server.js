@@ -43,7 +43,7 @@ const upload = multer({
     storage: storage,
     limits: { fileSize: 5 * 1024 * 1024 }, // Limit file size to 5MB
     fileFilter: (req, file, cb) => {
-        const filetypes = /pdf|doc|docx|ppt|pptx|txt/; // Allowed file types
+        const filetypes = /pdf|doc|png|jpeg|webp|jpg|docx|ppt|pptx|txt/; // Allowed file types
         const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
         const mimetype = filetypes.test(file.mimetype);
         if (extname && mimetype) {
@@ -60,13 +60,14 @@ const fileSchema = new mongoose.Schema({
     examSlot: { type: String, required: true },
     examType: { type: String, required: true },
     filePath: { type: String, required: true },
+    examDate: { type: Date, required: true },
 });
 
 const File = mongoose.model("File", fileSchema);
 
 // Upload endpoint
 app.post("/upload", upload.single("file"), async (req, res) => {
-    const { semester, subject, examSlot, examType } = req.body;
+    const { semester, subject, examSlot, examType, examDate } = req.body;
 
     if (!req.file) {
         return res.status(400).json({ error: "No file uploaded." });
@@ -80,6 +81,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
             examSlot: examSlot.toUpperCase(),
             examType: examType.toUpperCase(),
             filePath: req.file.path, // Path to the uploaded file
+            examDate: examDate
         });
 
         // Save the file information to the database
@@ -89,7 +91,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
         res.status(201).json({
             message: "File uploaded and saved successfully",
             file: req.file,
-            details: { semester, subject, examSlot, examType },
+            details: { semester, subject, examSlot, examType, examDate },
         });
     } catch (error) {
         console.error("Error saving file to database:", error);
