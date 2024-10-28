@@ -6,6 +6,7 @@ import UploadPage from './pages/uploadpage'
 import ViewPapers from './pages/viewPapers'
 import Motivation from './components/Motivation'
 import SubjectsPage from './pages/card1'
+import SignUp from './pages/sighnUp'
 
 
 const router = createBrowserRouter([
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <LandingPage/>
+      },
+      {
+        path: '/signUp',
+        element: <SignUp/>
       },
       {
         path: '/viewpapers',
