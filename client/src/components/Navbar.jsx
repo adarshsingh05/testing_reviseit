@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { MenubarDemo } from './menubar';
 import { CgLogIn } from "react-icons/cg";
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,10 +28,12 @@ const Navbar = () => {
         alt='Logo'
       />
       <MenubarDemo />
-      <Button className='m-6 bg-[#d9d9d9] text-black font-bold border border-black hover:text-white flex items-center space-x-2'>
-        <CgLogIn />
-        <span>Login</span>
-      </Button>
+      <Link to='/login'>
+        <Button className='m-6 bg-[#d9d9d9] text-black font-bold border border-black hover:text-white flex items-center space-x-2'>
+          <CgLogIn />
+          <span>Login</span>
+        </Button>
+      </Link>
     </nav>
   );
 };

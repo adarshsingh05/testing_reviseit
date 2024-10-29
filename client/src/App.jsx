@@ -7,6 +7,7 @@ import ViewPapers from './pages/viewPapers'
 import Motivation from './components/Motivation'
 import SubjectsPage from './pages/card1'
 import SignUp from './pages/sighnUp'
+import Login from './pages/Login'
 
 
 const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: '/signUp',
         element: <SignUp/>
+      },
+      {
+        path: '/login',
+        element: <Login/>
       },
       {
         path: '/viewpapers',
