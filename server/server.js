@@ -4,6 +4,10 @@ const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs"); // Import fs module
+const connectDB = require("./DB/connectuserDB");
+const dotenv = require("dotenv")
+
+dotenv.config();
 
 // Create an instance of the Express application
 const app = express();
@@ -110,5 +114,6 @@ app.get("/files", async (req, res) => {
 });
 // Start the server
 app.listen(PORT, () => {
+    connectDB();
     console.log(`Server running on http://localhost:${PORT}`);
 });
