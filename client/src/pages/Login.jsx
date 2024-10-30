@@ -14,18 +14,22 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-[#E5E5E5] min-h-screen w-auto flex items-center justify-center p-4">
-      <div className="flex flex-col md:flex-row items-center justify-center w-full max-w-4xl bg-white rounded-md shadow-lg">
+    <div className="relative min-h-screen w-full flex items-center justify-center p-4 overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-pink-200 via-purple-200 to-blue-200 animate-light-gradient opacity-70"></div>
+
+      {/* Main Content Container */}
+      <div className="relative flex flex-col md:flex-row items-center justify-center w-full max-w-4xl bg-white rounded-md shadow-lg">
         
         {/* Image Section - Hidden on Smaller Screens */}
         <img 
-          className="w-full h-auto md:w-[45%] md:h-[550px] hidden md:block rounded-l-md p-4" 
+          className="w-full h-auto md:w-[45%] md:h-[450px] hidden md:block rounded-l-md p-4" 
           src="/login.png" 
           alt="Login Illustration" 
         />
 
         {/* Login Form Section */}
-        <div className="w-full md:w-[85%] p-8 md:p-14 flex flex-col items-center justify-center">
+        <div className="w-full md:w-[75%] p-8 md:p-14 flex flex-col items-center justify-center bg-opacity-90">
           <h1 className="text-3xl text-center mb-8 font-mono">
             Welcome Back to, <span className="text-green-500">ReviseIt</span>
           </h1>

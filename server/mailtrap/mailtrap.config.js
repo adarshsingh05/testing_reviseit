@@ -1,8 +1,8 @@
 const { MailtrapClient } = require("mailtrap");
 
-const TOKEN = "9771783b247ab66ba0c6980a96f36217";
+const TOKEN = "2eafd836150a3ca5ac5b5ee422103ae8";
 
-const client = new MailtrapClient({
+const mailtrapClient = new MailtrapClient({
   token: TOKEN,
 });
 
@@ -11,18 +11,9 @@ const sender = {
   name: "Mailtrap Test",
 };
 
-// Change 'recipients' to an array of objects
-const recipients = [
-  { email: "adarshashokbaghel@gmail.com" } // Ensure it's an object within an array
-];
 
-client
-  .send({
-    from: sender,
-    to: recipients,
-    subject: "You are awesome!",
-    text: "Congrats for sending test email with Mailtrap!",
-    category: "Integration Test",
-  })
-  .then(console.log)
-  .catch(console.error);
+  module.exports={
+    mailtrapClient,
+    sender
+
+  }
