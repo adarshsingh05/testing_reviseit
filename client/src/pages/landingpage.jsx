@@ -14,7 +14,7 @@ const LandingPage = () => {
 
   return (
     <div className="">
-      <Navbar />
+      <Navbar/>
       <div className="w-full flex flex-row justify-center items-center">
         {/* Top Banner Section */}
         <div className="bg-gradient-to-r from-purple-500 to-gray-400 text-white py-8 px-6 rounded-2xl h-[200px] w-[80%] flex flex-col md:flex-row items-center justify-around m-6 mt-10">

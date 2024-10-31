@@ -8,6 +8,8 @@ import Motivation from './components/Motivation'
 import SubjectsPage from './pages/card1'
 import SignUp from './pages/sighnUp'
 import Login from './pages/Login'
+import ForgetPassword from './pages/forgetpassword'
+import VerificationPage from './pages/verificationPage'
 
 
 const router = createBrowserRouter([
@@ -22,6 +24,15 @@ const router = createBrowserRouter([
         path: '/signUp',
         element: <SignUp/>
       },
+      {
+        path: '/forgetpassword',
+        element: <ForgetPassword/>
+      },
+      {
+        path: '/verifycode',
+        element: <VerificationPage/>
+      },
+     
       {
         path: '/login',
         element: <Login/>

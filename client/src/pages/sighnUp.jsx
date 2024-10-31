@@ -5,10 +5,11 @@ import Input from '@/components/input';
 import { Lock, Mail, User } from 'lucide-react';
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PasswordStrengthMeter from '@/components/PasswordStrengthMeter';
 
 const SignUp = () => {
+    const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -21,7 +22,7 @@ const SignUp = () => {
             email: email,
             password: password
         };
-    
+        navigate('/verifycode');
         try {
             const response = await axios.post('http://localhost:5000/api/auth/signup', data, {
                 headers: {
