@@ -2,10 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { MenubarDemo } from './menubar';
 import { CgLogIn } from "react-icons/cg";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useAuthStore from '@/store/authStore';
+import axios from 'axios';
 
 const Navbar = () => {
+  const { isCheckingAuth, checkAuth, isAuthenticated, user } = useAuthStore();
+  const navigate = useNavigate(); // Use navigate for redirecting
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // Call checkAuth on mount
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +24,20 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Handle logout function
+  const handleLogout = async () => {
+    try {
+      await axios.post('http://localhost:5000/api/auth/logout');
+      window.location.reload(); // Refresh the page
+      
+      navigate('/');
+      console.log("logged out successfully") // Redirect to home or desired page after logout
+    } catch (error) {
+      console.error("Logout failed:", error);
+      // Optionally, display an error message to the user
+    }
+  };
 
   return (
     <nav
@@ -28,12 +51,23 @@ const Navbar = () => {
         alt='Logo'
       />
       <MenubarDemo />
-      <Link to='/login'>
-        <Button className='m-6 bg-[#d9d9d9] text-black font-bold border border-black hover:text-white flex items-center space-x-2'>
+
+      {isAuthenticated && user.isVerified ? (
+        <Button
+          className='m-6 bg-[#d9d9d9] text-black font-bold border border-black hover:text-white flex items-center space-x-2'
+          onClick={handleLogout}
+        >
           <CgLogIn />
-          <span>Login</span>
+          <span>Logout</span>
         </Button>
-      </Link>
+      ) : (
+        <Link to='/login'>
+          <Button className='m-6 bg-[#d9d9d9] text-black font-bold border border-black hover:text-white flex items-center space-x-2'>
+            <CgLogIn />
+            <span>Login</span>
+          </Button>
+        </Link>
+      )}
     </nav>
   );
 };

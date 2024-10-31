@@ -2,10 +2,19 @@ import Footer from "@/components/footer";
 import Motivation from "@/components/Motivation";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import useAuthStore from '@/store/authStore'
 
 const LandingPage = () => {
+  // getting the user object
+  const { isCheckingAuth, checkAuth, isAuthenticated, user } = useAuthStore();
+
+  // Call checkAuth on mount
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
   // Function to format the date to a readable format
   const getCurrentDate = () => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -14,28 +23,28 @@ const LandingPage = () => {
 
   return (
     <div className="">
-      <Navbar/>
+      <Navbar />
       <div className="w-full flex flex-row justify-center items-center">
         {/* Top Banner Section */}
         <div className="bg-gradient-to-r from-purple-500 to-gray-400 text-white py-8 px-6 rounded-2xl h-[200px] w-[80%] flex flex-col md:flex-row items-center justify-around m-6 mt-10">
           <div className="flex flex-col space-y-2">
             <p className="text-sm">{getCurrentDate()}</p> {/* Display dynamic date here */}
-            <h1 className="text-2xl font-bold">Welcome back, John!</h1>
+            <h1 className="text-2xl font-bold">
+              Welcome back, {user ? user.name : "Guest"}!
+            </h1>
             <p className="text-base">Always stay updated in your student portal</p>
           </div>
 
           {/* Decorative Images */}
           <div className="relative flex items-center mt-4 md:mt-0 space-x-4">
-            {/* Graduation Hat Image */}
             <div className="flex items-center justify-center">
               <img
                 src="/Scholarcap scroll.png"
                 alt="Graduation Hat"
-                className="w-auto h-[auto]  object-contain hidden md:flex"
+                className="w-auto h-[auto] object-contain hidden md:flex"
               />
             </div>
 
-            {/* Scroll Image */}
             <div className="flex items-center justify-center">
               <img
                 src="/collegestudent.png"
@@ -44,7 +53,6 @@ const LandingPage = () => {
               />
             </div>
 
-            {/* Backpack Image */}
             <div className="flex items-center justify-center">
               <img
                 src="/Backpack.png"
@@ -59,7 +67,6 @@ const LandingPage = () => {
       {/* Main Content */}
       <div className="h-[100%] flex flex-col items-center justify-center">
         <div className="p-6 max-w-[100%] md:max-w-[80%] flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-8">
-          {/* Left Section (Text) */}
           <div className="text-left space-y-4 md:max-w-sm m-6">
             <span className="bg-black h-5 text-white px-4 py-1 rounded-full text-s font-bold uppercase tracking-wide">
               All for Free
@@ -77,16 +84,13 @@ const LandingPage = () => {
             </Link>
           </div>
 
-          {/* Right Section (Placeholder for Image) */}
           <div className="flex-shrink-0 m-7 bg-white rounded-full">
             <img src="/image 21.png" alt="Illustrations" className="w-full h-auto object-cover m-8" />
           </div>
         </div>
 
-        {/* Additional Content Section */}
-        <Motivation/>
-         {/* Footer */}
-         <Footer/>
+        <Motivation />
+        <Footer />
       </div>
     </div>
   );
