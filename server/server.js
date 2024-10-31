@@ -5,7 +5,7 @@ const path = require("path");
 const fs = require("fs");
 const dotenv = require("dotenv");
 const authRoutes = require('./routes/auth.routes'); // Ensure the path is correct
-
+const cookieParser  = require('cookie-parser')
 
 const { connectDB, File } = require("./DB/connectFileDB"); // Import connectDB and File model
 const { signup } = require("./controller/auth.controller");
@@ -18,6 +18,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 app.use("/uploads", express.static("uploads"));
 
 // Create uploads directory if it doesn't exist
