@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'; // Import eye icon
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'; // Import eye off icon
 
 const VerificationPage = () => {
   const [code, setCode] = useState('');
   const [message, setMessage] = useState('');
-  const [showSuccess, setShowSuccess] = useState(false); // State for success animation
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [isCodeVisible, setIsCodeVisible] = useState(false); // State for code visibility
   const navigate = useNavigate();
 
   const handleVerification = async (e) => {
     e.preventDefault();
-
     const data = { code };
 
     console.log('Sending data:', data);
@@ -26,9 +28,8 @@ const VerificationPage = () => {
 
       if (response.data.success) {
         setMessage('Account Created Successfully!');
-        setShowSuccess(true); // Show success animation
+        setShowSuccess(true);
 
-        // Redirect to the login page after 2 seconds
         setTimeout(() => {
           navigate('/login');
         }, 2000);
@@ -49,6 +50,10 @@ const VerificationPage = () => {
     }
   };
 
+  const toggleCodeVisibility = () => {
+    setIsCodeVisible((prev) => !prev); // Toggle visibility
+  };
+
   return (
     <div className="flex min-h-screen justify-center items-center bg-gray-50">
       <div className="flex flex-col justify-center items-start w-full md:w-[600px] m-8 md:mr-4">
@@ -56,20 +61,24 @@ const VerificationPage = () => {
           <span className="material-icons"></span> Enter The Verification Code to Continue
         </a>
         <div className="space-y-6 ml-8">
-          <a href="/" className="text-sm text-gray-600 hover:text-gray-900">&lt; Back to login</a>
+          <a href="/login" className="text-sm text-gray-600 hover:text-gray-900">&lt; Back to login</a>
           <h1 className="text-3xl font-bold text-gray-800">Verify code</h1>
           <p className="text-gray-600">An authentication code has been sent to your email.</p>
           <form onSubmit={handleVerification} className="space-y-4">
             <div className="flex items-center border-b border-gray-300 py-2">
               <input
-                type="text"
+                type={isCodeVisible ? 'text' : 'password'} // Change input type based on visibility
                 placeholder="Enter Code"
                 className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
               />
-              <button type="button" className="text-gray-500 focus:outline-none">
-                <span className="material-icons">visibility</span>
+              <button type="button" onClick={toggleCodeVisibility} className="text-gray-500 focus:outline-none">
+                {isCodeVisible ? (
+                  <VisibilityOffIcon /> // Eye off icon for hiding code
+                ) : (
+                  <RemoveRedEyeIcon /> // Eye icon for showing code
+                )}
               </button>
             </div>
             <div className="flex items-center justify-between">

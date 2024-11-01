@@ -1,18 +1,20 @@
-import '../index.css' 
+import '../index.css';
 import axios from 'axios';
-
 import Input from '@/components/input';
 import { Lock, Mail, User } from 'lucide-react';
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link, useNavigate } from 'react-router-dom';
 import PasswordStrengthMeter from '@/components/PasswordStrengthMeter';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'; // Import eye icon for showing password
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'; // Import eye off icon for hiding password
 
 const SignUp = () => {
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false); // State for password visibility
 
     const handleSignup = async (e) => {
         e.preventDefault();
@@ -22,7 +24,7 @@ const SignUp = () => {
             email: email,
             password: password
         };
-        navigate('/verifycode');
+
         try {
             const response = await axios.post('http://localhost:5000/api/auth/signup', data, {
                 headers: {
@@ -30,16 +32,19 @@ const SignUp = () => {
                 }
             });
             console.log('Signup successful:', response.data);
+            navigate('/verifycode'); // Move navigate here to ensure it only runs on successful signup
         } catch (error) {
             console.error('Error signing up:', error);
         }
     };
-    
+
+    const togglePasswordVisibility = () => {
+        setIsPasswordVisible((prev) => !prev); // Toggle password visibility
+    };
 
     return (
         <>
             <div className="relative w-full h-screen flex items-center justify-center p-4 overflow-hidden">
-                
                 {/* Light Gradient Animated Background */}
                 <div className="absolute inset-0 bg-gradient-to-br from-pink-200 via-purple-200 to-blue-200 animate-light-gradient opacity-70"></div>
 
@@ -58,6 +63,7 @@ const SignUp = () => {
                                     type="text"
                                     placeholder="Full Name"
                                     value={name}
+                                    required
                                     onChange={(e) => setName(e.target.value)}
                                 />
                                 <Input
@@ -66,17 +72,32 @@ const SignUp = () => {
                                     type="text"
                                     placeholder="Email ID"
                                     value={email}
+                                    required
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
-                                <Input
-                                    icon={Lock}
-                                    type="password"
-                                    placeholder="Password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    iconColor='text-[#ff664e]'
-                                />
-                                <PasswordStrengthMeter password={password}/>
+                                <div className="relative"> {/* Make the container relative */}
+                                    <Input
+                                        icon={Lock}
+                                        type={isPasswordVisible ? 'text' : 'password'} // Change type based on visibility
+                                        placeholder="Password"
+                                        value={password}
+                                        required
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        iconColor='text-[#ff664e]'
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={togglePasswordVisibility}
+                                        className="absolute text-white inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
+                                    >
+                                        {isPasswordVisible ? (
+                                            <VisibilityOffIcon /> // Eye off icon for hiding password
+                                        ) : (
+                                            <RemoveRedEyeIcon /> // Eye icon for showing password
+                                        )}
+                                    </button>
+                                </div>
+                                <PasswordStrengthMeter password={password} />
                                 
                                 {/* Centered Button */}
                                 <div className="flex justify-center mt-6">

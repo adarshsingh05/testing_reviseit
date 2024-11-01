@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Input from "@/components/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye"; // Import eye icon for showing password
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"; // Import eye off icon for hiding password
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,6 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [successDialogVisible, setSuccessDialogVisible] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false); // State for password visibility
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -51,6 +54,10 @@ const Login = () => {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible((prev) => !prev); // Toggle password visibility
+  };
+
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center p-4 overflow-hidden">
       {/* Animated Background */}
@@ -73,20 +80,29 @@ const Login = () => {
           <form onSubmit={handleLogin} className="w-full space-y-4">
             <Input
               icon={Mail}
+              className="w-full"
               type="text"
               placeholder="Email ID"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full pl-10 pr-3 py-2 bg-gray-800 text-gray-100 placeholder-gray-400 border border-gray-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-500 transition duration-200"
             />
-            <Input
-              icon={Lock}
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full pl-10 pr-3 py-2 bg-gray-800 text-gray-100 placeholder-gray-400 border border-gray-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-500 transition duration-200"
-            />
+            <div className="relative">
+              <Input
+                icon={Lock}
+                className="w-full"
+                type={isPasswordVisible ? 'text' : 'password'} // Change type based on visibility
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                // className="pr-12" // Add padding to the right for the icon
+              />
+              <span
+                className="absolute right-3 top-2 text-gray-400 cursor-pointer mb-2"
+                onClick={togglePasswordVisibility}
+              >
+                {isPasswordVisible ? <VisibilityOffIcon /> : <RemoveRedEyeIcon />}
+              </span>
+            </div>
             <div className="flex flex-row justify-between text-sm">
               <Link to="/forgetpassword" className="text-[#ff664e]">
                 Forgot Password?
@@ -113,13 +129,14 @@ const Login = () => {
           </form>
         </div>
       </div>
-
       {/* Success Dialog */}
       {successDialogVisible && (
         <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-md shadow-md text-center">
-            <h2 className="text-lg font-bold">Logged in successfully!</h2>
-            <Loader className="w-8 h-8 animate-spin mt-4" />
+            <h2 className="text-lg font-semibold">Logged in successfully! Redirecting to the Home Page</h2>
+            <div className="flex justify-center items-center mt-4">
+              <Loader className="w-8 h-8 animate-spin text-green-600" />
+            </div>
           </div>
         </div>
       )}

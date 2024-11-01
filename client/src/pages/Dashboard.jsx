@@ -1,23 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useAuthStore from "@/store/authStore";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { MenubarDemo } from "@/components/menubar";
 import { CgLogIn } from "react-icons/cg";
 
 const Dashboard = () => {
-  
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [loading, setLoading] = useState(true); // Add a loading state
 
   const { checkAuth, isAuthenticated, user } = useAuthStore();
 
-  // Call checkAuth on mount
   useEffect(() => {
     const checkUserAuth = async () => {
       await checkAuth();
+      setLoading(false); // Set loading to false once auth check completes
     };
     checkUserAuth();
   }, [checkAuth]);
@@ -31,18 +30,27 @@ const Dashboard = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Handle logout function
   const handleLogout = async () => {
     try {
       await axios.post("http://localhost:5000/api/auth/logout");
-      useAuthStore.setState({ user: null, isAuthenticated: false }); // Clear auth state
-      navigate("/"); // Redirect to home after logout
+      useAuthStore.setState({ user: null, isAuthenticated: false });
+      navigate("/");
       console.log("Logged out successfully");
     } catch (error) {
       console.error("Logout failed:", error);
-      // Optionally, display an error message to the user
     }
   };
+
+  // Render a loading state while checking authentication
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  // If user is not authenticated, redirect to login page
+  if (!isAuthenticated) {
+    navigate("/login");
+    return null;
+  }
 
   return (
     <>
@@ -57,7 +65,7 @@ const Dashboard = () => {
             src="/image.png"
             alt="Logo"
           />
-          <MenubarDemo />{" "}
+          <MenubarDemo />
           <Button
             className="m-6 bg-[#d9d9d9] text-black font-bold border border-black hover:text-white flex items-center space-x-2"
             onClick={handleLogout}
@@ -68,8 +76,14 @@ const Dashboard = () => {
         </nav>
       </div>
 
-      <div> Your Coins : {user.coins}</div>
-      
+      {/* Conditionally render user data */}
+      {user && (
+        <>
+          <div>Your Coins: {user.coins}</div>
+          <div>Paper Uploaded: {user.paperUpload}</div>
+          <div>Paper Downloaded: {user.paperDownload}</div>
+        </>
+      )}
     </>
   );
 };

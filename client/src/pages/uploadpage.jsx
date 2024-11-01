@@ -54,6 +54,33 @@ const UploadPage = () => {
     }
 };
 
+// paper upload count
+  const updatePaperUploadCount = async () => {
+    const uploadData = {
+        userId: userId,
+        paperUploadCount: Number(1), // Make sure coin is a number
+    };
+
+    console.log('Sending paper upload data:', uploadData);
+    
+    try {
+        await axios.post('http://localhost:5000/api/auth/paperupload', uploadData, {
+            headers: {
+                'Content-Type': 'application/json', // Ensure JSON content type
+            },
+        });
+        // setMessage('Paper and Coins uploaded successfully! Thanx'); // Success message
+        console.log("paper data sent successfully")
+    } catch (error) {
+        if (error.response) {
+            console.error('Error uploading paper data:', error.response.data);
+        } else {
+            console.error('Error uploading paper:', error);
+        }
+        setMessage('Error uploading paperdata.'); // Error message
+    }
+};
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); // Start loading
@@ -82,6 +109,7 @@ const UploadPage = () => {
       setMessage('File uploaded successfully!'); // Success message
      
      await updatecoin();
+     await updatePaperUploadCount();
     } catch (error) {
       console.error('Error uploading file:', error);
       setMessage('Error uploading file.'); // Error message
