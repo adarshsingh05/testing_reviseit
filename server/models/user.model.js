@@ -30,6 +30,14 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 0, // Default value for coins
     },
+    paperUpload: {
+        type: Number,
+        default: 0, // Default value for coins
+    },
+    paperDownload: {
+        type: Number,
+        default: 0, // Default value for coins
+    },
 }, { timestamps: true });
 
 const User = mongoose.model("createdUsers", userSchema);

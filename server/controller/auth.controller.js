@@ -246,6 +246,65 @@ const updateCoins = async (req, res) => {
         return res.status(500).json({ success: false, message: "Internal Server Error" });
     }
 };
+const paperUpload = async (req, res) => {
+    const { userId, paperUploadCount } = req.body;
+
+    // paper upload
+    const numericpaperUploadCount = parseFloat(paperUploadCount);
+    
+    if (isNaN(numericpaperUploadCount)) {
+        return res.status(400).json({ success: false, message: "Amount must be a number" });
+    }
+
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+
+        user.paperUpload = (user.paperUpload || 0) + numericpaperUploadCount; // Update the coin balance
+        await user.save();
+
+        return res.status(200).json({
+            success: true,
+            message: "Paper upload count updated successfully",
+            totalPaper: user.paperUpload
+        });
+    } catch (error) {
+        console.error("Error updating count of paper upload:", error);
+        return res.status(500).json({ success: false, message: "Internal Server Error" });
+    }
+};
+
+const paperDownload = async (req, res) => {
+    const { userId, paperDownloadCount } = req.body;
+
+    // paper upload
+    const numericpaperDownloadCount = parseFloat(paperDownloadCount);
+    
+    if (isNaN(numericpaperDownloadCount)) {
+        return res.status(400).json({ success: false, message: "Amount must be a number" });
+    }
+
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+
+        user.paperDownload = (user.paperDownload|| 0) + numericpaperDownloadCount; // Update the coin balance
+        await user.save();
+
+        return res.status(200).json({
+            success: true,
+            message: "Paper upload count updated successfully",
+            paperDownload: user.paperDownload
+        });
+    } catch (error) {
+        console.error("Error updating count of paper download:", error);
+        return res.status(500).json({ success: false, message: "Internal Server Error" });
+    }
+};
 
 // Exporting the functions using CommonJS syntax
 module.exports = {
@@ -257,4 +316,6 @@ module.exports = {
     resetPassword,
     checkAuth,
     updateCoins,
+    paperUpload,
+    paperDownload,
 };
