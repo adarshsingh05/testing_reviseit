@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema({
     resetPasswordExpiresAt: Date,
     verificationToken: String,
     verificationTokenExpiresAt: Date,
+    coins: {
+        type: Number,
+        default: 0, // Default value for coins
+    },
 }, { timestamps: true });
 
 const User = mongoose.model("createdUsers", userSchema);

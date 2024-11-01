@@ -23,11 +23,13 @@ const signup = async (req, res) => {
         }
 
         const hashedPassword = await bcryptjs.hash(password, 10);
-        const verificationToken = Math.floor(100000+ Math.random()* 900000).toString();
+        const verificationToken = Math.floor(100000+ Math.random()* 900000);
+        console.log("Verification Token:", verificationToken);
         const user = new User({
             email,
             password: hashedPassword,
             name,
+            coins: 100,
             verificationToken: verificationToken,
             verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000
         });
@@ -35,7 +37,9 @@ const signup = async (req, res) => {
         await user.save();
 
         // Token to verify on email - this is a function below in utils
+        console.log("Verification Token:", verificationToken);
          generateTokenAndSetCookie(res, user._id);
+         console.log(user.email)
          sendVerificationToken(user.email, verificationToken); // Ensure this function is defined
 
         // Sending a response to verify the signup
@@ -139,7 +143,7 @@ try {
     await user.save();
 
     // send email to reset the email function
-    await sendPasswordResetEmail(user.email, `http://localhost:5000/api/auth/resetpassword/${resetToken}`)
+    await sendPasswordResetEmail(user.email, `http://localhost:5173/resetpassword/${resetToken}`)
     return res.status(200).json({
         success:true,
         message: "mail sent"
@@ -211,6 +215,38 @@ const checkAuth = async (req, res)=>{
         
     }
 }
+
+// update coin
+const updateCoins = async (req, res) => {
+    const { userId, amount } = req.body;
+
+    // Convert amount to number
+    const numericAmount = parseFloat(amount);
+    
+    if (isNaN(numericAmount)) {
+        return res.status(400).json({ success: false, message: "Amount must be a number" });
+    }
+
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+
+        user.coins = (user.coins || 0) + numericAmount; // Update the coin balance
+        await user.save();
+
+        return res.status(200).json({
+            success: true,
+            message: "Coins updated successfully",
+            coins: user.coins
+        });
+    } catch (error) {
+        console.error("Error updating coins:", error);
+        return res.status(500).json({ success: false, message: "Internal Server Error" });
+    }
+};
+
 // Exporting the functions using CommonJS syntax
 module.exports = {
     signup,
@@ -220,4 +256,5 @@ module.exports = {
     forgotPassword,
     resetPassword,
     checkAuth,
+    updateCoins,
 };
