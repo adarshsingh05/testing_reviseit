@@ -11,6 +11,7 @@ import VerificationPage from './pages/verificationPage';
 import useAuthStore from '@/store/authStore';
 import { useEffect } from 'react';
 import Dashboard from './pages/Dashboard';
+import EnterNewPassword from './components/enterNewPassword';
 
 // Protect routes that require authentication
 const ProtectedRoute = ({ children }) => {
@@ -76,11 +77,19 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: '/resetpassword/:token',
+        element: (
+          <RedirectAuthenticatedUser>
+            <EnterNewPassword />
+            </RedirectAuthenticatedUser>
+        ),
+      },
+      {
         path: '/dashboard',
         element: (
-          <ProtectedRoute>
+          // <ProtectedRoute>
             <Dashboard />
-          </ProtectedRoute>
+          // </ProtectedRoute>
         ),
       },
       { path: '/', element: <LandingPage /> },

@@ -6,7 +6,15 @@ import { Progress } from '@/components/ui/progress'; // Importing Progress compo
 import { FaUpload, FaCalendarAlt, FaBook, FaUserGraduate } from 'react-icons/fa'; // Importing icons
 import { FaCheckToSlot } from "react-icons/fa6";
 import Footer from '@/components/footer';
+import useAuthStore from '@/store/authStore'
+
 const UploadPage = () => {
+   // getting the user object
+   const { isCheckingAuth, checkAuth, isAuthenticated, user } = useAuthStore();
+    
+    const userId= user._id;
+    var coin=Number(100);
+    // const coinData = {userId,coin};
   const [file, setFile] = useState(null);
   const [semester, setSemester] = useState('');
   const [subject, setSubject] = useState('');
@@ -20,6 +28,31 @@ const UploadPage = () => {
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
+
+  const updatecoin = async () => {
+    const coinData = {
+        userId: userId,
+        amount: Number(coin), // Make sure coin is a number
+    };
+
+    console.log('Sending coin data:', coinData);
+    
+    try {
+        await axios.post('http://localhost:5000/api/auth/updatecoins', coinData, {
+            headers: {
+                'Content-Type': 'application/json', // Ensure JSON content type
+            },
+        });
+        setMessage('Paper and Coins uploaded successfully! Thanx'); // Success message
+    } catch (error) {
+        if (error.response) {
+            console.error('Error uploading coins:', error.response.data);
+        } else {
+            console.error('Error uploading coins:', error);
+        }
+        setMessage('Error uploading coins.'); // Error message
+    }
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,6 +80,8 @@ const UploadPage = () => {
       });
 
       setMessage('File uploaded successfully!'); // Success message
+     
+     await updatecoin();
     } catch (error) {
       console.error('Error uploading file:', error);
       setMessage('Error uploading file.'); // Error message

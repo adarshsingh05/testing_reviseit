@@ -10,6 +10,7 @@ const LandingPage = () => {
   // getting the user object
   const { isCheckingAuth, checkAuth, isAuthenticated, user } = useAuthStore();
 
+
   // Call checkAuth on mount
   useEffect(() => {
     checkAuth();
@@ -20,7 +21,7 @@ const LandingPage = () => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date().toLocaleDateString(undefined, options);
   };
-
+ 
   return (
     <div className="">
       <Navbar />
@@ -97,3 +98,4 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+

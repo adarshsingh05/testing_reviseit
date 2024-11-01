@@ -20,7 +20,13 @@ import Navbar from "@/components/Navbar"; // Adjust the path according to your s
 import { Link } from "react-router-dom";
 import Footer from "@/components/footer";
 
+import useAuthStore from '@/store/authStore'
+
+
 const ViewPapers = () => {
+  const { isCheckingAuth, checkAuth, isAuthenticated, user } = useAuthStore();
+  const userId= user._id;
+  var coin=Number(-50);
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -45,6 +51,33 @@ const ViewPapers = () => {
 
     fetchFiles();
   }, []);
+
+
+  // update coin
+  const updatecoin = async () => {
+    const coinData = {
+        userId: userId,
+        amount: Number(coin), // Make sure coin is a number
+    };
+
+    console.log('Sending coin data:', coinData);
+    
+    try {
+        await axios.post('http://localhost:5000/api/auth/updatecoins', coinData, {
+            headers: {
+                'Content-Type': 'application/json', // Ensure JSON content type
+            },
+        });
+        console.log(' Coins uploaded successfully!'); 
+    } catch (error) {
+        if (error.response) {
+            console.log('Error uploading coins:', error.response.data);
+        } else {
+            console.log('Error uploading coins:', error);
+        }
+        console.log('Error uploading coins.'); // Error message
+    }
+};
 
   const formatDateToDDMMYYYY = (dateString) => {
     const date = new Date(dateString);
@@ -176,7 +209,7 @@ const ViewPapers = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <Button>
+                      <Button onClick={updatecoin}>
                       <GrView className='text-white' />
                         View Paper</Button>
                     </a>

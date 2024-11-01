@@ -25,19 +25,7 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Handle logout function
-  const handleLogout = async () => {
-    try {
-      await axios.post('http://localhost:5000/api/auth/logout');
-      window.location.reload(); // Refresh the page
-      
-      navigate('/');
-      console.log("logged out successfully") // Redirect to home or desired page after logout
-    } catch (error) {
-      console.error("Logout failed:", error);
-      // Optionally, display an error message to the user
-    }
-  };
+
 
   return (
     <nav
@@ -53,13 +41,23 @@ const Navbar = () => {
       <MenubarDemo />
 
       {isAuthenticated && user.isVerified ? (
-        <Button
-          className='m-6 bg-[#d9d9d9] text-black font-bold border border-black hover:text-white flex items-center space-x-2'
-          onClick={handleLogout}
-        >
-          <CgLogIn />
-          <span>Logout</span>
-        </Button>
+        // <Button
+        //   className='m-6 bg-[#d9d9d9] text-black font-bold border border-black hover:text-white flex items-center space-x-2'
+        //   onClick={handleLogout}
+        // >
+        //   <CgLogIn />
+        //   <span>Logout</span>
+        // </Button>
+        <Link to={'/dashboard'}>
+        <div className='bg-[#d9d9d9] rounded-full mr-10 h-[70px] w-[70px] flex items-center justify-center text-4xl font-mono cursor-pointer'>
+         
+          
+          {user.name.charAt(0).toUpperCase()}
+         
+         
+          
+          </div>
+          </Link>
       ) : (
         <Link to='/login'>
           <Button className='m-6 bg-[#d9d9d9] text-black font-bold border border-black hover:text-white flex items-center space-x-2'>
