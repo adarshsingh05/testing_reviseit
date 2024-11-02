@@ -63,7 +63,7 @@ const ViewPapers = () => {
   useEffect(() => {
     const fetchFiles = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/files");
+        const response = await axios.get("http://localhost:5000/api/auth/view");
         setFiles(response.data);
         setFilteredFiles(response.data);
       } catch (err) {
@@ -179,7 +179,7 @@ const ViewPapers = () => {
       setModalMessage("Insufficient coins, please upload paper to earn coins");
       setIsModalVisible(true); // Show modal
     } else {
-      window.open(`http://localhost:5000/${file.filePath}`, "_blank");
+      window.open(`https://oqufvztnijspmjevvccb.supabase.co/storage/v1/object/public/user_docs/${file.filePath}`, "_blank");
       updatecoin(); // Call updatecoin if the user has enough coins
       updateDownloadUploadCount();
     }
