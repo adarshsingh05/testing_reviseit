@@ -1,9 +1,8 @@
-// Creating the JSON Web Token
 const jwt = require("jsonwebtoken");
 
 const generateTokenAndSetCookie = (res, userId) => {
-    console.log("Generating token for userId:", userId); // Log userId here
-    const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
+    console.log("Generating token for userId:", userId.toString()); // Convert to string here
+    const token = jwt.sign({ userId: userId.toString() }, "mysecretkey", {
         expiresIn: "7d",
     });
 
@@ -17,5 +16,4 @@ const generateTokenAndSetCookie = (res, userId) => {
     return token;
 };
 
-// Exporting the function using CommonJS syntax
 module.exports = generateTokenAndSetCookie;
