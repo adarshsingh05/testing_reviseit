@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye"; // Import eye icon for showing password
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"; // Import eye off icon for hiding password
+import OauthLogin from "@/components/ui/OauthLogin";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -59,8 +60,10 @@ const Login = () => {
   };
 
   return (
+    
     <div className="relative min-h-screen w-full flex items-center justify-center p-4 overflow-hidden">
       {/* Animated Background */}
+      
       <div className="absolute inset-0 bg-gradient-to-br from-pink-200 via-purple-200 to-blue-200 animate-light-gradient opacity-70"></div>
 
       {/* Main Content Container */}
@@ -77,7 +80,9 @@ const Login = () => {
           <h1 className="text-3xl text-center mb-8 font-mono">
             Welcome Back to, <span className="text-green-500">ReviseIt</span>
           </h1>
-          <form onSubmit={handleLogin} className="w-full space-y-4">
+          <OauthLogin/>
+          <hr className="text-black bg-black h-[1.7px] w-full mt-4"></hr>
+          <form onSubmit={handleLogin} className="w-full space-y-4 mt-4">
             <Input
               icon={Mail}
               className="w-full"
@@ -128,6 +133,7 @@ const Login = () => {
             </div>
           </form>
         </div>
+        
       </div>
       {/* Success Dialog */}
       {successDialogVisible && (

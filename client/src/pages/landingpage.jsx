@@ -9,6 +9,7 @@ import useAuthStore from '@/store/authStore'
 const LandingPage = () => {
   // getting the user object
   const { isCheckingAuth, checkAuth, isAuthenticated, user } = useAuthStore();
+  console.log("user:",user)
 
 
   // Call checkAuth on mount

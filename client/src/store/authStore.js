@@ -13,6 +13,7 @@ const useAuthStore = create((set) => ({
 
     checkAuth: async () => {
         set({ isCheckingAuth: true, error: null });
+        
         try {
             const response = await axios.get("http://localhost:5000/api/auth/checkauth");
             set({ user: response.data.user, isAuthenticated: true, isCheckingAuth: false });
@@ -20,7 +21,8 @@ const useAuthStore = create((set) => ({
             set({
                 error: error.response?.data?.message || "An error occurred",
                 isCheckingAuth: false,
-                isAuthenticated: false
+                isAuthenticated: false,
+                user: null, // Reset user on error
             });
         }
     }

@@ -5,18 +5,20 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MenubarDemo } from "@/components/menubar";
 import { CgLogIn } from "react-icons/cg";
+import { FaCoins, FaUpload, FaDownload, FaUser, FaEnvelope, FaEdit } from "react-icons/fa";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [loading, setLoading] = useState(true); // Add a loading state
+  const [loading, setLoading] = useState(true);
 
   const { checkAuth, isAuthenticated, user } = useAuthStore();
+
 
   useEffect(() => {
     const checkUserAuth = async () => {
       await checkAuth();
-      setLoading(false); // Set loading to false once auth check completes
+      setLoading(false);
     };
     checkUserAuth();
   }, [checkAuth]);
@@ -41,12 +43,10 @@ const Dashboard = () => {
     }
   };
 
-  // Render a loading state while checking authentication
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  // If user is not authenticated, redirect to login page
   if (!isAuthenticated) {
     navigate("/login");
     return null;
@@ -56,6 +56,7 @@ const Dashboard = () => {
     <>
       <div>
         <nav
+        
           className={`flex justify-between items-center w-full h-[100px] sticky top-0 z-10 rounded-full transition-all duration-300 ${
             isScrolled ? "bg-white/30 backdrop-blur-lg" : "bg-transparent"
           }`}
@@ -76,13 +77,46 @@ const Dashboard = () => {
         </nav>
       </div>
 
-      {/* Conditionally render user data */}
       {user && (
-        <>
-          <div>Your Coins: {user.coins}</div>
-          <div>Paper Uploaded: {user.paperUpload}</div>
-          <div>Paper Downloaded: {user.paperDownload}</div>
-        </>
+        <div className="flex justify-center items-center h-screen bg-gray-100">
+          <div className="w-[80%] max-w-3xl bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
+            <div className="bg-[#d9d9d9] rounded-full h-[80px] w-[80px] flex items-center justify-center text-3xl font-mono cursor-pointer text-gray-700 mb-4">
+              {user.name.charAt(0).toUpperCase()}
+            </div>
+
+            <div className="text-2xl font-bold text-gray-800 mb-4 flex items-center space-x-2">
+              <FaUser className="text-blue-500" />
+              <span>{user.name.toUpperCase()}</span>
+            </div>
+
+            <div className="w-full flex flex-col space-y-3">
+              <div className="bg-gray-50 p-4 rounded-md flex items-center space-x-3">
+                <FaEnvelope className="text-purple-500" />
+                <span className="text-gray-700">Email: {user.email}</span>
+              </div>
+
+              <div className="bg-gray-50 p-4 rounded-md flex items-center space-x-3">
+                <FaCoins className="text-yellow-500" />
+                <span className="text-gray-700">Available Coins: {user.coins}</span>
+              </div>
+
+              <div className="bg-gray-50 p-4 rounded-md flex items-center space-x-3">
+                <FaUpload className="text-green-500" />
+                <span className="text-gray-700">Total Papers Uploaded: {user.paperUpload}</span>
+              </div>
+
+              <div className="bg-gray-50 p-4 rounded-md flex items-center space-x-3">
+                <FaDownload className="text-red-500" />
+                <span className="text-gray-700">Total Papers Downloaded: {user.paperDownload}</span>
+              </div>
+
+              <div className="bg-gray-50 p-4 rounded-md flex items-center space-x-3">
+                <FaEdit className="text-gray-500" />
+                <span className="text-gray-700">Number of Mock Tests: Coming Soon</span>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </>
   );
