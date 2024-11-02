@@ -8,9 +8,11 @@ import { FaCheckToSlot } from "react-icons/fa6";
 import Footer from '@/components/footer';
 import useAuthStore from '@/store/authStore';
 import axios from 'axios';
+import CoinModal from '@/components/coin component/CoinModal';
 
 
 const UploadPage = () => {
+    const [isCoinModalOpen, setIsCoinModalOpen] = useState(false); // State for CoinModal visibility
     const { isCheckingAuth, checkAuth, isAuthenticated, user } = useAuthStore();
     const userId = user._id;
     const coin = Number(100);
@@ -24,6 +26,10 @@ const UploadPage = () => {
     const [message, setMessage] = useState('');
     const [uploadProgress, setUploadProgress] = useState(0);
     const [loading, setLoading] = useState(false);
+    
+    const closeCoinModal = () => {
+        setIsCoinModalOpen(false); // Close the modal
+    };
 
     // update coin function
     
@@ -133,6 +139,8 @@ const updatePaperUploadCount = async () => {
           setFile(null);
           await updatecoin();
      await updatePaperUploadCount();
+     setIsCoinModalOpen(true); // Open the CoinModal on successful upload
+
   
       } catch (error) {
           console.error('Error uploading file:', error);
@@ -272,6 +280,7 @@ const updatePaperUploadCount = async () => {
                 </div>
             </div>
             <div>
+            <CoinModal isOpen={isCoinModalOpen} onClose={closeCoinModal} /> {/* Pass props to CoinModal */}
                 <Footer />
             </div>
         </>

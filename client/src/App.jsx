@@ -12,6 +12,7 @@ import useAuthStore from '@/store/authStore';
 import { useEffect } from 'react';
 import Dashboard from './pages/Dashboard';
 import EnterNewPassword from './components/enterNewPassword';
+import CoinModal from './components/coin component/CoinModal';
 
 // Protect routes that require authentication
 const ProtectedRoute = ({ children }) => {
@@ -96,6 +97,7 @@ const router = createBrowserRouter([
       { path: '/forgetpassword', element: <ForgetPassword /> },
       { path: '/verifycode', element: <VerificationPage /> },
       { path: '/csfundamentals', element: <SubjectsPage /> },
+      { path: '/coin', element: <CoinModal /> },
     ],
   },
 ]);
