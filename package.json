@@ -48,6 +48,7 @@
 		"nodemon": "^3.1.4"
 	},
 	"resolutions": {
-		"agent-base": "6.0.2"
+		"agent-base": "6.0.2",
+		    "mkdirp": "^3.0.1"
 	}
 }
