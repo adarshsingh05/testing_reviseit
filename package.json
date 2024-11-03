@@ -36,6 +36,7 @@
 		"https-proxy-agent": "^7.0.5",
 		"jsonwebtoken": "^9.0.2",
 		"mailtrap": "^3.4.0",
+		"mkdirp": "^3.0.1",
 		"mongoose": "^8.5.2",
 		"multer": "^1.4.5-lts.1",
 		"node-fetch": "^2.7.0",
@@ -43,11 +44,10 @@
 		"supabase": "^1.207.9",
 		"tar": "^6.1.11"
 	},
-	
 	"devDependencies": {
 		"nodemon": "^3.1.4"
 	},
 	"resolutions": {
-    "agent-base": "6.0.2"
-  }
+		"agent-base": "6.0.2"
+	}
 }
