@@ -21,6 +21,7 @@
     "@radix-ui/react-progress": "^1.1.0",
     "@radix-ui/react-select": "^2.1.2",
     "@radix-ui/react-slot": "^1.1.0",
+    "@supabase/supabase-js": "^2.46.1",
     "add": "^2.0.6",
     "auth-tutorial": "file:..",
     "axios": "^1.7.7",
@@ -39,6 +40,7 @@
     "react-typing-effect": "^2.0.5",
     "select": "^1.1.2",
     "shadcn": "^2.1.2",
+    "supabase": "^1.207.9",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
     "zustand": "^5.0.1"
