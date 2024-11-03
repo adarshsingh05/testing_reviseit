@@ -14,13 +14,12 @@
 	"type": "module",
 	"license": "ISC",
 	"engines": {
-		
 		"node": ">=20.x"
 	},
 	"dependencies": {
 		"@supabase/storage-js": "^2.7.1",
 		"@supabase/supabase-js": "^2.46.1",
-		"agent-base": "^7.1.1",
+		"agent-base": "^6.0.2",
 		"bcryptjs": "^2.4.3",
 		"buffer": "^6.0.3",
 		"cookie-parser": "^1.4.6",
@@ -33,6 +32,7 @@
 		"express": "^4.19.2",
 		"firebase": "^11.0.1",
 		"firebase-admin": "^12.7.0",
+		"http-proxy-agent": "^7.0.2",
 		"https-proxy-agent": "^7.0.5",
 		"jsonwebtoken": "^9.0.2",
 		"mailtrap": "^3.4.0",
@@ -43,7 +43,11 @@
 		"supabase": "^1.207.9",
 		"tar": "^6.1.11"
 	},
+	
 	"devDependencies": {
 		"nodemon": "^3.1.4"
-	}
+	},
+	"resolutions": {
+    "agent-base": "6.0.2"
+  }
 }
