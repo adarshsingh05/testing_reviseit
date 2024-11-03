@@ -20,6 +20,13 @@ const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
+const admin = require('firebase-admin');
+
+// Initialize Firebase Admin
+admin.initializeApp({
+    credential: admin.credential.applicationDefault(), // Or provide your service account key
+});
+
 // Middleware
 app.use(cors({
     origin: 'http://localhost:5173', // Your frontend URL
@@ -47,7 +54,7 @@ const upload = multer({
 
 // Upload endpoint
 app.post("/api/auth/upload", upload.single("documents"), async (req, res) => {
-    const { semester, subject, examSlot, examType, examDate, userId } = req.body; // Assuming you're also passing userId
+    const { semester, subject, examSlot, examType, examDate, userId, uploadedBy } = req.body; // Assuming you're also passing userId
     console.log(req.body); // Log the request body
     console.log(req.file); 
 
@@ -84,7 +91,8 @@ app.post("/api/auth/upload", upload.single("documents"), async (req, res) => {
                     examSlot: examSlot.toUpperCase(),
                     examType: examType.toUpperCase(),
                     filePath: fileUrl,
-                    examDate: examDate
+                    examDate: examDate,
+                    uploadedBy: uploadedBy
                 }
             ]);
 
@@ -126,6 +134,12 @@ app.get("/api/auth/view", async (req, res) => {
         res.status(500).json({ error: "Failed to fetch files." });
     }
 });
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../client/dist")));
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "../client/dist", "index.html"));
+    });
+}
 
 // Start the server
 app.listen(PORT, () => {

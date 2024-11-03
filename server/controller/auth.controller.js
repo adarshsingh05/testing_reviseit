@@ -58,6 +58,24 @@ const signup = async (req, res) => {
     }
 };
 
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find().select('-password'); // Exclude the password field
+        if (!users || users.length === 0) {
+            return res.status(404).json({ success: false, message: "No users found" });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Users fetched successfully",
+            users
+        });
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        res.status(500).json({ success: false, message: "Internal Server Error" });
+    }
+};
+
 const verifySignup = async (req, res) => {
     const {code} = req.body;
     try {
@@ -319,4 +337,5 @@ module.exports = {
     updateCoins,
     paperUpload,
     paperDownload,
+    getAllUsers, 
 };

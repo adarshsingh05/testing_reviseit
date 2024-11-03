@@ -207,15 +207,15 @@ const ViewPapers = () => {
                   {currentItems.map((file) => (
                     <Card key={file._id} className="w-full shadow-lg shadow-gray-700">
                       <CardHeader>
-                        <CardTitle className='font-bold'>SUBJECT: {file.subject}</CardTitle>
+                        <CardTitle className='text-lg  font-bold'>SUBJECT: {file.subject}</CardTitle>
                         <CardDescription className='mt-4'>{`Semester: ${file.semester} | Exam Slot: ${file.examSlot}`}
     
                         </CardDescription>
                        <div> {`Uploaded By: ${file.uploadedBy}`}</div>
                       </CardHeader>
                       <CardContent className="mt-1">
-                        <h2 className="text-lg font-bold mb-2">Exam Type: {file.examType}</h2>
-                        <h2 className="text-lg font-bold mb-2">Exam Date: {formatDateToDDMMYYYY(file.examDate)}</h2>
+                        <h2 className="font-bold mb-2">Exam Type: {file.examType}</h2>
+                        <h2 className=" font-bold mb-2">Exam Date: {formatDateToDDMMYYYY(file.examDate)}</h2>
                       </CardContent>
                       <CardFooter className="flex justify-center">
                         <Button onClick={() => handleViewPaperClick(file)}>

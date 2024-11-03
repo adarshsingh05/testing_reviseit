@@ -9,6 +9,7 @@ import PasswordStrengthMeter from '@/components/PasswordStrengthMeter';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Oauth from '@/components/Oauth';
+import MessageModal from '@/components/MessageModal'; // Import the MessageModal component
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -16,37 +17,27 @@ const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isModalVisible, setIsModalVisible] = useState(false); // State to control modal visibility
 
     const handleSignup = async (e) => {
         e.preventDefault();
         const data = { name, email, password };
 
-        try {
-            const response = await axios.post('http://localhost:5000/api/auth/signup', data, {
-                headers: { 'Content-Type': 'application/json' }
-            });
-            console.log('Signup successful:', response.data);
-            navigate('/');
-        } catch (error) {
-            console.error('Error signing up:', error);
-            if (error.response && error.response.status === 400) {
-                setIsModalVisible(true);
-                setTimeout(() => {
-                    setIsModalVisible(false);
-                    navigate('/login');
-                }, 2000);
-            }
-        }
+        // Show the modal instead of console log
+        setIsModalVisible(true);
     };
 
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(prev => !prev);
     };
 
+    const closeModal = () => {
+        setIsModalVisible(false);
+    };
+
     return (
         <div className="flex items-center justify-center min-h-screen p-4 bg-gradient-to-br from-blue-100 to-purple-300">
-            <div className="relative w-full max-w-md  rounded-lg shadow-lg p-8">
+            <div className="relative w-full max-w-md rounded-lg shadow-lg p-8">
                 <h1 className="text-3xl font-bold text-center mb-4">Welcome to <span className="text-[#ff664e]">ReviseIt</span></h1>
                 <h2 className="text-xl text-gray-700 text-center mb-6">Create an Account</h2>
                 <Oauth className='text-center' />
@@ -107,6 +98,11 @@ const SignUp = () => {
                     </p>
                 </div>
             </div>
+            <MessageModal 
+                isOpen={isModalVisible} 
+                onClose={closeModal} 
+                message="Use Google Signup to Proceed, Unable to Fetch Provided Email" 
+            />
         </div>
     );
 };

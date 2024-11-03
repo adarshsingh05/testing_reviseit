@@ -1,6 +1,6 @@
 // In routes/auth.routes.js
 const express = require('express');
-const { signup, login, logout,verifySignup,forgotPassword,resetPassword, checkAuth, updateCoins,paperUpload,paperDownload } = require('../controller/auth.controller');
+const { signup, login, logout,verifySignup,forgotPassword,resetPassword, checkAuth,getAllUsers, updateCoins,paperUpload,paperDownload } = require('../controller/auth.controller');
 const router = express.Router();
 const verifyToken = require("../middleware/verifytoken")
 router.get("/checkauth", verifyToken, checkAuth)
@@ -13,5 +13,6 @@ router.post('/resetpassword/:token', resetPassword);
 router.post('/updatecoins', updateCoins);
 router.post('/paperupload', paperUpload);
 router.post('/paperdownload', paperDownload);
+router.get('/alluser', getAllUsers);
 
 module.exports = router;
