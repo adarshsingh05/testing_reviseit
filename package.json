@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "server/server.js",
 	"scripts": {
-		  "postinstall": "echo 'Skipping postinstall'",
+		"postinstall": "echo 'Skipping postinstall'",
 		"dev": "cross-env NODE_ENV=development nodemon server/server.js",
 		"start": "cross-env NODE_ENV=production node server/server.js",
 		"build": "npm install && npm install --prefix client && npm run build --prefix client"
@@ -17,8 +17,8 @@
 		"node": "20.x"
 	},
 	"dependencies": {
-		"signal-exit": "^3.0.6",
 		"@supabase/supabase-js": "^2.46.1",
+		"agent-base": "^7.1.1",
 		"bcryptjs": "^2.4.3",
 		"cookie-parser": "^1.4.6",
 		"cors": "^2.8.5",
@@ -33,6 +33,7 @@
 		"mongoose": "^8.5.2",
 		"multer": "^1.4.5-lts.1",
 		"node-fetch": "^2.7.0",
+		"signal-exit": "^3.0.6",
 		"supabase": "^1.207.9",
 		"tar": "^6.1.11"
 	},
