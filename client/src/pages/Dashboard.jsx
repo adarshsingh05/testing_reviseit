@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import useAuthStore from "@/store/authStore";
+import { CircleLoader } from 'react-spinners';
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MenubarDemo } from "@/components/menubar";
 import { CgLogIn } from "react-icons/cg";
 import { FaCoins, FaUpload, FaDownload, FaUser, FaEnvelope, FaEdit } from "react-icons/fa";
+import Footer from "@/components/footer";
+import RankingComponent from "@/components/RankingComponent";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -13,7 +16,6 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
 
   const { checkAuth, isAuthenticated, user } = useAuthStore();
-
 
   useEffect(() => {
     const checkUserAuth = async () => {
@@ -43,8 +45,26 @@ const Dashboard = () => {
     }
   };
 
+  const allUser = async () => {
+    try {
+      const fetchedUser = await axios.get("http://localhost:5000/api/auth/alluser");
+      console.log(fetchedUser);
+      console.log("All users fetched successfully");
+    } catch (error) {
+      console.log("Error fetching users", error);
+    }
+  };
+  
+  allUser();
+
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <div className="flex justify-center mt-6">
+          <CircleLoader color="#4a90e2" loading={loading} size={300} />
+        </div>
+      </div>
+    );
   }
 
   if (!isAuthenticated) {
@@ -56,7 +76,6 @@ const Dashboard = () => {
     <>
       <div>
         <nav
-        
           className={`flex justify-between items-center w-full h-[100px] sticky top-0 z-10 rounded-full transition-all duration-300 ${
             isScrolled ? "bg-white/30 backdrop-blur-lg" : "bg-transparent"
           }`}
@@ -78,8 +97,8 @@ const Dashboard = () => {
       </div>
 
       {user && (
-        <div className="flex justify-center items-center h-screen bg-gray-100">
-          <div className="w-[80%] max-w-3xl bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
+        <div className="flex flex-col md:flex-row justify-center items-center h-screen bg-gray-100">
+          <div className="ml-4 md:ml-1 w-full md:w-[60%] max-w-3xl bg-white shadow-lg rounded-lg p-6 flex flex-col items-center mb-4 md:mb-0">
             <div className="bg-[#d9d9d9] rounded-full h-[80px] w-[80px] flex items-center justify-center text-3xl font-mono cursor-pointer text-gray-700 mb-4">
               {user.name.charAt(0).toUpperCase()}
             </div>
@@ -116,8 +135,14 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
+
+          {/* Leaderboard Section */}
+          <div className="w-full md:w-[30%] ml-3 md:ml-0">
+            <RankingComponent  />
+          </div>
         </div>
       )}
+      <Footer />
     </>
   );
 };

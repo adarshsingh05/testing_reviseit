@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { CircleLoader } from 'react-spinners';  // Import CircleLoader from react-spinners
+
 import { Mail, Lock, Loader } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "@/components/input";
@@ -86,7 +88,9 @@ const Login = () => {
               type="submit"
               disabled={isLoading}
             >
-              {isLoading ? <Loader className="w-6 h-6 animate-spin" /> : "Login"}
+              {isLoading ? <div className="flex justify-center mt-6">
+    <CircleLoader color="#4a90e2" loading={isLoading} size={30} />
+</div> : "Login"}
             </Button>
           </div>
         </form>
@@ -95,7 +99,7 @@ const Login = () => {
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-md shadow-md text-center">
             <h2 className="text-lg font-semibold">Logged in successfully! Redirecting to Home...</h2>
-            <Loader className="w-8 h-8 animate-spin text-green-600 mt-4" />
+            <CircleLoader color="#4a90e2" loading={isLoading} size={30} />
           </div>
         </div>
       )}

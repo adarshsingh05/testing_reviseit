@@ -28,7 +28,7 @@ const Coin = () => {
   return (
     <div className='flex justify-center items-center w-full h-full'> {/* Ensure full width and height of parent */}
       <div style={coinStyle}>
-        <img className='text-center' src="/coinimage.jpg" alt="Coin" style={imageStyle} />
+        <img className='text-center' src="/golden.png" alt="Coin" style={imageStyle} />
       </div>
     </div>
   );

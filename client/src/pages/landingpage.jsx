@@ -77,7 +77,7 @@ const LandingPage = () => {
               Get all VIT Exam Papers, Subject-wise Notes, Mock Papers, and a Lot more at one Stop Place
             </h1>
             <p className="text-sm text-gray-600">Crafted By</p>
-            <p className="text-lg font-bold text-gray-900">Open Source Contributors</p>
+            <p className="text-lg font-bold text-gray-900">Code_Smoker's</p>
             <Link to="/upload">
               <Button className="m-3">Upload Papers</Button>
             </Link>

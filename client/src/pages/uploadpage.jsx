@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {supabase} from '../utils/supabaseClient'
+import { CircleLoader } from 'react-spinners';  // Import CircleLoader from react-spinners
 import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress'; 
@@ -122,7 +123,8 @@ const updatePaperUploadCount = async () => {
                   examSlot: examSlot.toUpperCase(),
                   examType: examType.toUpperCase(),
                   examDate,
-                  filePath: uniqueFilePath
+                  filePath: uniqueFilePath,
+                  uploadedBy: user.name,
               }
           ]);
   
@@ -238,7 +240,7 @@ const updatePaperUploadCount = async () => {
                                     <option value="CAT 1">CAT 1</option>
                                     <option value="CAT 2">CAT 2</option>
                                     <option value="FAT">FAT</option>
-                                    <option value="Other">Other</option>
+                                    <option value="Other">Modal Papers</option>
                                 </select>
                             </div>
 
@@ -266,9 +268,9 @@ const updatePaperUploadCount = async () => {
 
                         {/* Progress bar and message display */}
                         {loading && (
-                            <div className="w-full max-w-md mt-4">
-                                <Progress value={uploadProgress} className="h-4 bg-blue-500 rounded" />
-                            </div>
+                            <div className="flex justify-center mt-6">
+                            <CircleLoader color="#4a90e2" loading={loading} size={50} />
+                        </div>
                         )}
                         {message && (
                             <p className="mt-4 text-center text-lg font-medium text-gray-700">
