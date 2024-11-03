@@ -17,6 +17,7 @@
 		"node": "20.x"
 	},
 	"dependencies": {
+		"signal-exit": "^3.0.6",
 		"@supabase/supabase-js": "^2.46.1",
 		"bcryptjs": "^2.4.3",
 		"cookie-parser": "^1.4.6",
