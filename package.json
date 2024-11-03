@@ -14,7 +14,8 @@
 	"type": "module",
 	"license": "ISC",
 	"engines": {
-		"node": "20.x"
+		
+		"node": ">=18.x"
 	},
 	"dependencies": {
 		"@supabase/storage-js": "^2.7.1",
