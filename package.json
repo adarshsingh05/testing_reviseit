@@ -6,15 +6,15 @@
 	"scripts": {
 		"dev": "cross-env NODE_ENV=development nodemon server/server.js",
 		"start": "cross-env NODE_ENV=production node server/server.js",
-		"build": "npm install && npm install --prefix client && npm run build --prefix client"
+		"build": "npm install && npm run build --prefix client"
 	},
 	"keywords": [],
 	"author": "",
 	"type": "module",
 	"license": "ISC",
 	"engines": {
-    "node": "20.x"
-  },
+		"node": "20.x"
+	},
 	"dependencies": {
 		"@supabase/supabase-js": "^2.46.1",
 		"bcryptjs": "^2.4.3",
