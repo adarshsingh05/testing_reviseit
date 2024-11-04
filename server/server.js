@@ -29,7 +29,8 @@ admin.initializeApp({
 
 // Middleware
 app.use(cors({
-    origin: 'http://localhost:5173', // Your frontend URL
+    origin: 'https://testing-reviseit-1.onrender.com',
+
     credentials: true
 }));
 app.use(express.json());
