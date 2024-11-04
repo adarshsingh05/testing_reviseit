@@ -122,7 +122,7 @@ app.use('/api/auth', authRoutes);
     app.get('/api/test-db', async (req, res) => {
         try {
             // Replace 'YourModel' with an actual Mongoose model
-            const data = await User.find(); 
+            const data = await createdusers.find(); 
             res.status(200).json({ success: true, data });
         } catch (error) {
             console.error('Database query error:', error);
