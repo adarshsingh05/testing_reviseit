@@ -32,13 +32,19 @@ const OauthLogin = () => {
                 navigate("/");
             }, 2000);
         } catch (error) {
+            
             console.error('Error logging in with Google:', error);
+                    console.log("errior in checkAuth", error);
+
+
             setShowErrorModal(true);
 
             setTimeout(() => {
                 setShowErrorModal(false);
                 navigate("/signup");
             }, 2000);
+            return res.status(400).json({ success: false, message: "Amount must be a number" });
+
         }
     };
 
