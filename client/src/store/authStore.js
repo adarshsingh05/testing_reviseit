@@ -15,7 +15,7 @@ const useAuthStore = create((set) => ({
         set({ isCheckingAuth: true, error: null });
         
         try {
-            const response = await axios.get("http://localhost:5000/api/auth/checkauth");
+            const response = await axios.get("https://testing-reviseit-1.onrender.com/api/auth/checkauth");
             set({ user: response.data.user, isAuthenticated: true, isCheckingAuth: false });
         } catch (error) {
             set({

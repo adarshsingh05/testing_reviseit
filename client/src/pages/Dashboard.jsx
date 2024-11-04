@@ -36,7 +36,7 @@ const Dashboard = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:5000/api/auth/logout");
+      await axios.post("https://testing-reviseit-1.onrender.com/api/auth/logout");
       useAuthStore.setState({ user: null, isAuthenticated: false });
       navigate("/");
       console.log("Logged out successfully");
@@ -47,7 +47,7 @@ const Dashboard = () => {
 
   const allUser = async () => {
     try {
-      const fetchedUser = await axios.get("http://localhost:5000/api/auth/alluser");
+      const fetchedUser = await axios.get("https://testing-reviseit-1.onrender.com/api/auth/alluser");
       console.log(fetchedUser);
       console.log("All users fetched successfully");
     } catch (error) {

@@ -70,7 +70,7 @@ const ViewPapers = () => {
   useEffect(() => {
     const fetchFiles = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/auth/view");
+        const response = await axios.get("https://testing-reviseit-1.onrender.com/api/auth/view");
         setFiles(response.data);
         setFilteredFiles(response.data);
       } catch (err) {

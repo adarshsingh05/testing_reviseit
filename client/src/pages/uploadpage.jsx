@@ -43,7 +43,7 @@ const UploadPage = () => {
     console.log('Sending coin data:', coinData);
     
     try {
-        await axios.post('http://localhost:5000/api/auth/updatecoins', coinData, {
+        await axios.post('https://testing-reviseit-1.onrender.com/api/auth/updatecoins', coinData, {
             headers: {
                 'Content-Type': 'application/json', // Ensure JSON content type
             },
@@ -70,7 +70,7 @@ const updatePaperUploadCount = async () => {
   console.log('Sending paper upload data:', uploadData);
   
   try {
-      await axios.post('http://localhost:5000/api/auth/paperupload', uploadData, {
+      await axios.post('https://testing-reviseit-1.onrender.com/api/auth/paperupload', uploadData, {
           headers: {
               'Content-Type': 'application/json', // Ensure JSON content type
           },

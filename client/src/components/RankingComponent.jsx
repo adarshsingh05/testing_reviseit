@@ -8,7 +8,7 @@ const RankingComponent = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/auth/alluser");
+                const response = await axios.get("https://testing-reviseit-1.onrender.com/api/auth/alluser");
                 if (response.data.success) {
                     const sortedUsers = response.data.users.sort((a, b) => b.coins - a.coins);
                     setUsers(sortedUsers);

@@ -27,7 +27,7 @@ const Oauth = () => {
                 isVerified: true,
             };
 
-            await axios.post('http://localhost:5000/api/auth/signup', data, {
+            await axios.post('https://testing-reviseit-1.onrender.com/api/auth/signup', data, {
                 headers: {
                     'Content-Type': 'application/json'
                 }

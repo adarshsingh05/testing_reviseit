@@ -26,7 +26,7 @@ const EnterNewPassword = () => {
         console.log('Sending data:', password);
 
         try {
-            const response = await axios.post(`http://localhost:5000/api/auth/resetpassword/${token}`, email, {
+            const response = await axios.post(`https://testing-reviseit-1.onrender.com/api/auth/resetpassword/${token}`, email, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
