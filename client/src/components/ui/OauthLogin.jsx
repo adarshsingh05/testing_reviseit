@@ -20,7 +20,7 @@ const OauthLogin = () => {
 
             const data = { email: user.email };
 
-            await axios.post('http://localhost:5000/api/auth/login', data, {
+            await axios.post('https://testing-reviseit-1.onrender.com/api/auth/login', data, {
                 headers: { 'Content-Type': 'application/json' }
             });
 
