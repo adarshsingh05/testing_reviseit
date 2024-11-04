@@ -118,6 +118,18 @@ app.post("/api/auth/upload", upload.single("documents"), async (req, res) => {
 // Use auth routes
 app.use('/api/auth', authRoutes);
 
+    // test end point
+    app.get('/api/test-db', async (req, res) => {
+        try {
+            // Replace 'YourModel' with an actual Mongoose model
+            const data = await User.find(); 
+            res.status(200).json({ success: true, data });
+        } catch (error) {
+            console.error('Database query error:', error);
+            res.status(500).json({ success: false, message: 'Database connection failed' });
+        }
+    });
+
 // Endpoint to get all uploaded files
 app.get("/api/auth/view", async (req, res) => {
     try {

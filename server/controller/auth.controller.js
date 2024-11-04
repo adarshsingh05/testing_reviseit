@@ -7,6 +7,9 @@ const sendVerificationToken = require('../mailtrap/email.js')
 const sendPasswordResetEmail = require("../mailtrap/email.js");
 const sendPasswordResetSuccessfullEmail = require("../mailtrap/email.js")
 const signup = async (req, res) => {
+
+
+    
     
     // Getting user data from body
     const { email, password, name } = req.body;
